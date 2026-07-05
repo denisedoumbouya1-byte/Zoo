@@ -3,9 +3,11 @@ package zoo;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public class Enclosure<T extends Animal> {
+
     private final String name;
     private final Set<T> inhabitants = new LinkedHashSet<>();
 
@@ -28,9 +30,17 @@ public class Enclosure<T extends Animal> {
     public List<T> getInhabitants() {
         return new ArrayList<>(inhabitants);
     }
+
+    public Optional<T> findAnimalByName(String animalName) {
+        return inhabitants.stream()
+                .filter(animal -> animal.name().equals(animalName))
+                .findFirst();
+    }
+
+
     @Override
     public String toString() {
-        return getClass().getSimpleName() +
-                "{name='" + name + "', inhabitants=" + inhabitants.size() + "}";
+        return getClass().getSimpleName()
+                + "{name='" + name + "', inhabitants=" + inhabitants.size() + "}";
     }
 }

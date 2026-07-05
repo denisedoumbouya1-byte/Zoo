@@ -6,12 +6,23 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class Zoo {
+
     private static final Logger LOGGER = Logger.getLogger(Zoo.class.getName());
 
     private final List<Enclosure<? extends Animal>> enclosures = new ArrayList<>();
 
+    // Blatt 08: Optional Suche über alle Gehege
+    public Optional<Animal> findAnimalByName(String animalName) {
+        return enclosures.stream()
+                .map(enclosure -> enclosure.findAnimalByName(animalName)
+                        .map(animal -> (Animal) animal))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .findFirst();
+    }
     public void addEnclosure(Enclosure<? extends Animal> enclosure) {
 
         if (enclosure == null) {

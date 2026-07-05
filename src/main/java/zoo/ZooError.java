@@ -1,0 +1,7 @@
+package zoo;
+
+public enum ZooError {
+    ANIMAL_COULD_NOT_BE_ADDED,
+    ANIMAL_COULD_NOT_BE_REMOVED,
+    COMMAND_NOT_EXECUTED
+}

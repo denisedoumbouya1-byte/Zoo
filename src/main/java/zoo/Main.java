@@ -31,6 +31,22 @@ public class Main {
         terrarium.add(new Snake("Sissi"));
         terrarium.add(new Turtle("Toni"));
 
+        CommandManager<Enclosure<? super Lion>> manager = new CommandManager<>();
+
+        AddAnimalCommand<Lion> addSimba =
+                new AddAnimalCommand<>(new Lion("Simba"));
+
+        manager.executeCommand(addSimba, catHouse);
+        manager.undo(catHouse);
+        manager.redo(catHouse);
+
+        RemoveAnimalCommand<Lion> removeLeo =
+                new RemoveAnimalCommand<>(new Lion("Leo"));
+
+        manager.executeCommand(removeLeo, catHouse);
+        manager.undo(catHouse);
+        manager.redo(catHouse);
+
         zoo.addEnclosure(aquarium);
         zoo.addEnclosure(catHouse);
         zoo.addEnclosure(mammalHouse);
